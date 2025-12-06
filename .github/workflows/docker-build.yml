@@ -1,0 +1,18 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main", "master", "feature/ci-setup" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag demoweb-app:$(date +%s)
