@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demoweb-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demoweb-app
+  template:
+    metadata:
+      labels:
+        app: demoweb-app
+    spec:
+      containers:
+        - name: demoweb-app
+          image: demoweb-node:1.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "8080"
+          ports:
+            - containerPort: 8080
